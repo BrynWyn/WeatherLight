@@ -34,7 +34,7 @@ class WeatherModule:
         }
     rainyDaysMorning = {}
     rainyDaysEvening = {}
-    middlePeriod = 5
+    threeOClock = 900
 
     def __init__(self):
         self.loadConfig()
@@ -48,12 +48,12 @@ class WeatherModule:
     def RunWeather(self):
         weatherJson = self.GetWeather()
         for days in weatherJson["SiteRep"]["DV"]["Location"]["Period"]:
-            if(self.CheckForRainMorning(days) == True):
+            if self.CheckForRainMorning(days) == True:
                 self.rainyDaysMorning.update({days["value"]:'1'})
             else:
                 self.rainyDaysMorning.update({days["value"]:'0'})
             
-            if(self.CheckForRainEvening(days) == True):
+            if self.CheckForRainEvening(days) == True:
                 self.rainyDaysEvening.update({days["value"]:'1'})
             else:
                 self.rainyDaysEvening.update({days["value"]:'0'})
@@ -62,30 +62,25 @@ class WeatherModule:
 
 
     def CheckForRainMorning(self, days):
-        count = 1
         for sections in days["Rep"]:
 
             rain = sections["W"] in self.rainCodes
-            if(rain == True & count <= self.middlePeriod):
+            if rain == True and int(sections["$"]) <= self.threeOClock:
                 return True
-
-            count = count + 1
 
         return False
 
     def CheckForRainEvening(self, days):
-        count = 1
         for sections in days["Rep"]:
             rain = sections["W"] in self.rainCodes
-            if(rain == True & count > self.middlePeriod):
+            if rain == True and int(sections["$"]) > self.threeOClock:
                 return True
-            count = count + 1
         return False
 
     def GetWeather(self):
 
-        with open("TestData.json") as json_file:
-            return json.load(json_file)
+        #with open("TestData.json") as json_file:
+            #return json.load(json_file)
         
         response = requests.get(self.apiBaseURL,params=self.headers)
 
