@@ -6,7 +6,7 @@ def SetupLights(rainyDays):
     SetupMorningLights(rainyDays[0])
     SetupEveningLights(rainyDays[1])
     a = SortDays(rainyDays)
-    set_brightness(0.1)
+    #set_brightness(0.1)
     #set_pixel(0, 255, 255, 255)
     show()
     print(a)
@@ -17,11 +17,17 @@ def SortDays(rainyDays):
 def SetupMorningLights(morningDays):
     days = SortDays(morningDays)
     for i in range(len(days)):
-        set_pixel(i+1, 255, 255, 255)
+        if(list(days.values())[i] == 1):
+            set_pixel(i+1, 0, 255, 0)
+        else:
+            set_pixel(i+1, 0, 0, 255)
         print("Setting Pixel " + str(i*2))
 
 def SetupEveningLights(eveningDays):
     days = SortDays(eveningDays)
     for i in range(len(days)):
-        set_pixel(i+1, 255, 255, 255)
+        if(list(days.values())[i] == 1):
+            set_pixel(i+1, 0, 255, 0)
+        else:
+            set_pixel(i+1, 0, 0, 255)
         print("Setting Pixel " + str((i*2)+1))
