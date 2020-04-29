@@ -7,7 +7,6 @@ class main:
         while True:
             response = weather.RunWeather()
             LightController.SetupLights(response)
-            print(response)
-            #time.sleep(1800)    
+            time.sleep(1800)    
 
 main()
