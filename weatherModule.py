@@ -47,7 +47,7 @@ class WeatherModule:
 
     def RunWeather(self):
         weatherJson = self.GetWeather()
-        for  in weatherJson["SiteRep"]["DV"]["Location"]["Period"]:
+        for days in weatherJson["SiteRep"]["DV"]["Location"]["Period"]:
             if(self.CheckForRainMorning(days) == True):
                 self.rainyDaysMorning.update({days["value"]:'1'})
             else:
