@@ -1,4 +1,4 @@
-#from blinkt import set_pixel, set_brightness, show, clear
+from blinkt import set_pixel, set_brightness, show, clear
 from collections import OrderedDict
 
 def SetupLights(rainyDays):
