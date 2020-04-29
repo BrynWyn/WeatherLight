@@ -1,0 +1,8 @@
+{
+    "API":{
+        "key":"",
+        "url":"",
+        "format":"json",
+        "locationID":""
+    }
+}
