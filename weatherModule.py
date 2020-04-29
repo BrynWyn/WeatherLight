@@ -80,7 +80,6 @@ class WeatherModule:
             if(rain == True & count > self.middlePeriod):
                 return True
             count = count + 1
-days
         return False
 
     def GetWeather(self):
