@@ -8,7 +8,6 @@ class WeatherModule:
     }
 
     rainCodes = {
-        "8":"Overcast",
         "9":"Light rain shower (night)",
         "10":"Light rain shower (day)",
         "11":"Drizzle",
@@ -56,14 +55,12 @@ class WeatherModule:
             if self.CheckForRainEvening(days) == True:
                 self.rainyDaysEvening.update({days["value"]:'1'})
             else:
-                self.rainyDaysEvening.update({days["value"]:'0'})
-
+                self.rainyDaysEvening.update({days["value"]:'0'})s
         return [self.rainyDaysMorning, self.rainyDaysEvening]
 
 
     def CheckForRainMorning(self, days):
         for sections in days["Rep"]:
-
             rain = sections["W"] in self.rainCodes
             if rain == True and int(sections["$"]) <= self.threeOClock:
                 return True
@@ -78,10 +75,6 @@ class WeatherModule:
         return False
 
     def GetWeather(self):
-
-        #with open("TestData.json") as json_file:
-            #return json.load(json_file)
-        
         response = requests.get(self.apiBaseURL,params=self.headers)
 
         if response.status_code == 200:

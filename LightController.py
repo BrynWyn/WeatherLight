@@ -3,11 +3,9 @@ from collections import OrderedDict
 import itertools
 
 def SetupLights(rainyDays):
-    #clear()
     SetupMorningLights(rainyDays[0])
     SetupEveningLights(rainyDays[1])
     set_brightness(0.1)
-    #set_pixel(0, 255, 255, 255)
     show()
 
 def SortDays(rainyDays):
